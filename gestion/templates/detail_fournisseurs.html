@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block titre %}
+Detail des fournisseurs
+{% endblock titre %}
+
+{% block content %}
+
+<table class="table table-bordered table-hover">
+
+    <tr>
+        <th>Nom</th>
+        <td>{{ fournisseurs.nom }}</td>
+    </tr>
+
+    <tr>
+        <th>Email</th>
+        <td>{{ fournisseurs.email }}</td>
+    </tr>
+
+    <tr>
+        <th>Telephone</th>
+        <td>{{ fournisseurs.telephone }}</td>
+    </tr>
+
+    <tr>
+        <th>Adresse</th>
+        <td>{{ fournisseurs.adresse }}</td>
+    </tr>
+
+    <tr>
+        <th>Produits</th>
+        <td>
+            {% for produit in fournisseurs.produit_set.all %}
+                {{ produit.nom }}<br>
+            {% empty %}
+                Aucun produit
+            {% endfor %}
+        </td>
+    </tr>
+
+</table>
+
+<a href="{% url 'liste_fournisseurs' %}" class="btn btn-secondary mt-2">
+    ⬅ Retour
+</a>
+
+{% endblock content %}

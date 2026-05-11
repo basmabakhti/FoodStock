@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4 text-center"> Liste des fournisseurs</h2>
+
+<div class="card shadow">
+    <div class="card-body">
+
+        <table class="table table-hover table-striped align-middle">
+
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                   <th>Adresse</th>
+                    <th>Plus</th>
+                </tr>
+            </thead>
+
+           <tbody>
+    {% for fournisseur in fournisseurs %}
+    <tr>
+        <td>
+            <a href="{% url 'detail_fournisseurs' fournisseur.id %}">
+                {{ fournisseur.nom }}
+            </a>
+        </td>
+        <td>{{ fournisseur.email }}</td>
+        <td>{{ fournisseur.telephone }}</td>
+        <td>{{ fournisseur.adresse }}</td>
+        <td>
+            <a href="{% url 'detail_fournisseurs' fournisseur.id %}" class="btn btn-sm btn-primary">
+                🔍 Détails
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

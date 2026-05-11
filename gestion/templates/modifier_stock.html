@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>✏️ Modifier le stock - {{ produit.nom }}</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Catégorie :</strong> {{ produit.categorie.libelle }}</p>
+            <p><strong>Fournisseur :</strong> {{ produit.fournisseur.nom }}</p>
+            <p><strong>Stock actuel :</strong> {{ produit.quantite }}</p>
+            <p><strong>Expiration actuelle :</strong> {{ produit.date_expiration }}</p>
+        </div>
+    </div>
+
+    <form method="POST" class="mt-4">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Nouvelle quantité</label>
+            <input type="number" name="quantite" class="form-control" value="{{ produit.quantite }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Nouvelle date d'expiration</label>
+            <input type="date" name="date_expiration" class="form-control" value="{{ produit.date_expiration|date:'Y-m-d' }}" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">💾 Enregistrer</button>
+        <a href="{% url 'liste_produits' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

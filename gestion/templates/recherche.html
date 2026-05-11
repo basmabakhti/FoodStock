@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="text-center mb-4">🔍 Recherche de produits</h2>
+
+<!-- FORMULAIRE DE RECHERCHE -->
+<form method="GET" action="{% url 'recherche' %}" class="row justify-content-center mb-4">
+
+    <!-- Recherche nom -->
+    <div class="col-md-4">
+        <input 
+            type="text" 
+            name="q" 
+            value="{{ query }}"
+            class="form-control"
+            placeholder="Rechercher un produit...">
+    </div>
+
+    <!-- Catégorie -->
+    <div class="col-md-3">
+        <select name="categorie" class="form-select">
+            <option value="">Toutes les catégories</option>
+            {% for cat in categories %}
+                <option value="{{ cat.id }}"
+                    {% if cat.id|stringformat:"s" == categorie_selected %}selected{% endif %}>
+                    {{ cat.libelle }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Fournisseur -->
+    <div class="col-md-3">
+        <select name="fournisseur_id" class="form-select">
+            <option value="">Tous les fournisseurs</option>
+            {% for f in fournisseurs %}
+                <option value="{{ f.id }}"
+                    {% if f.id|stringformat:"s" == fournisseur_selected %}selected{% endif %}>
+                    {{ f.nom }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Bouton -->
+    <div class="col-md-2">
+        <button class="btn btn-primary w-100" type="submit">
+            Filtrer
+        </button>
+    </div>
+
+</form>
+<!-- RESULTATS -->
+<div class="container">
+
+    {% if produits %}
+
+        <div class="row">
+
+            {% for p in produits %}
+
+            <div class="col-md-4 mb-3">
+
+                <div class="card shadow-sm card-hover p-3">
+
+                    <h5>{{ p.nom }}</h5>
+
+                    <p>
+                        Catégorie : {{ p.categorie.libelle|default:"-" }} <br>
+                        Fournisseur : {{ p.fournisseur.nom|default:"-" }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <p class="text-center text-muted">
+            Aucun produit trouvé 🔎
+        </p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

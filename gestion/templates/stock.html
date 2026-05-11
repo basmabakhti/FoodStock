@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <!-- TITRE -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">
+             Dashboard Stock
+        </h1>
+
+        <p class="text-muted">
+            Suivi intelligent des produits alimentaires
+        </p>
+    </div>
+
+
+    <!-- CARDS STATISTIQUES -->
+
+    <div class="row g-4 mb-5">
+
+        <!-- TOTAL -->
+        <div class="col-md-3">
+
+            <div class="card shadow border-0 text-center p-4">
+
+                <h5 class="text-muted">
+                    Total Produits
+                </h5>
+
+                <h1 class="fw-bold">
+                    {{ total }}
+                </h1>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONFORMES -->
+        <div class="col-md-3">
+
+            <div class="card shadow border-0 bg-success text-white text-center p-4">
+
+                <h5>
+                    🟢 Conformes
+                </h5>
+
+                <h1 class="fw-bold">
+                    {{ conformes }}
+                </h1>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROCHES -->
+        <div class="col-md-3">
+
+            <div class="card shadow border-0 bg-warning text-dark text-center p-4">
+
+                <h5>
+                    🟠 Expiration proche
+                </h5>
+
+                <h1 class="fw-bold">
+                    {{ proches }}
+                </h1>
+
+            </div>
+
+        </div>
+
+
+        <!-- PERIMES -->
+        <div class="col-md-3">
+
+            <div class="card shadow border-0 bg-danger text-white text-center p-4">
+
+                <h5>
+                    🔴 Périmés
+                </h5>
+
+                <h1 class="fw-bold">
+                    {{ perimes }}
+                </h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ALERTES -->
+
+    <div class="row">
+
+        <!-- PRODUITS PERIMES -->
+        <div class="col-md-6">
+
+            <div class="card shadow border-0 mb-4">
+
+                <div class="card-header bg-danger text-white">
+
+                    🔴 Produits périmés
+
+                </div>
+
+                <div class="card-body">
+
+                    {% for p in produits_perimes %}
+
+                        <div class="d-flex justify-content-between border-bottom py-2">
+
+                            <span>{{ p.nom }}</span>
+
+                            <span class="badge bg-danger">
+                                Expiré
+                            </span>
+
+                        </div>
+
+                    {% empty %}
+
+                        <p class="text-muted">
+                            Aucun produit périmé
+                        </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUITS PROCHES -->
+        <div class="col-md-6">
+
+            <div class="card shadow border-0 mb-4">
+
+                <div class="card-header bg-warning">
+
+                    🟠 Produits proches expiration
+
+                </div>
+
+                <div class="card-body">
+
+                    {% for p in produits_proches %}
+
+                        <div class="d-flex justify-content-between border-bottom py-2">
+
+                            <span>{{ p.nom }}</span>
+
+                            <span class="badge bg-warning text-dark">
+
+                                {{ p.date_expiration }}
+
+                            </span>
+
+                        </div>
+
+                    {% empty %}
+
+                        <p class="text-muted">
+                            Aucun produit proche expiration
+                        </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACTIONS RAPIDES -->
+
+    <div class="card shadow border-0 p-4">
+
+        <h4 class="mb-4">
+            ⚡ Actions rapides
+        </h4>
+
+        <div class="d-flex gap-3 flex-wrap">
+
+            <a href="{% url 'liste_produits' %}"
+               class="btn btn-dark">
+
+               📦 Produits
+
+            </a>
+
+            <a href="{% url 'liste_fournisseurs' %}"
+               class="btn btn-primary">
+
+               🏢 Fournisseurs
+
+            </a>
+
+            <a href="{% url 'recherche' %}"
+               class="btn btn-success">
+
+               🔍 Recherche
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

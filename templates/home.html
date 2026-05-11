@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- IMAGE HEADER -->
+<div class="mb-5">
+    <div class="position-relative">
+
+        <img src="{% static 'images/home.jpg' %}"
+             class="img-fluid w-100 rounded"
+             style="max-height: 350px; object-fit: cover;">
+
+        <!-- TEXTE SUR IMAGE -->
+        <div class="position-absolute top-50 start-50 translate-middle text-white text-center">
+           
+        </div>
+
+    </div>
+</div>
+<div class="container mb-5 text-center">
+
+    <h4 class="fw-bold mb-3">À propos de FoodStock</h4>
+
+    <p class="text-muted">
+        FoodStock est une application de gestion des produits alimentaires.
+        Elle permet de gérer les produits, suivre les stocks et organiser les fournisseurs.
+        Le système aide à surveiller les dates de péremption afin de réduire le gaspillage alimentaire
+        et améliorer la gestion des ressources.
+    </p>
+
+</div>
+<!-- TITRE -->
+<div class="text-center mb-4">
+    <h2 class="fw-bold">Dashboard</h2>
+</div>
+
+<!-- CARDS -->
+<div class="row">
+
+    <!-- PRODUITS -->
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 text-center card-hover">
+            <div class="card-body">
+                <h4>📦 Produits</h4>
+                <p>Gérer tous les produits alimentaires</p>
+                <a href="/produits/" class="btn btn-primary">Voir produits</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- STOCK -->
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 text-center card-hover">
+            <div class="card-body">
+                <h4>📊 Stock</h4>
+                <p>Suivi des quantités disponibles</p>
+                <a href="/stock/" class="btn btn-success">Analyse stock</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOURNISSEURS -->
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 text-center card-hover">
+            <div class="card-body">
+                <h4>🚚 Fournisseurs</h4>
+                <p>Gestion des fournisseurs alimentaires</p>
+                <a href="/fournisseurs/" class="btn btn-warning">Voir fournisseurs</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
